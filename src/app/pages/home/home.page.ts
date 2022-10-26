@@ -53,7 +53,6 @@ export class HomePage implements OnInit, AfterViewInit {
       , private alertController: AlertController
       , private animationController: AnimationController
       , private loadingController: LoadingController) {
-
     this.activeroute.queryParams.subscribe(params => {
       if (this.router.getCurrentNavigation().extras.state) {
 
@@ -66,7 +65,6 @@ export class HomePage implements OnInit, AfterViewInit {
           intentó entrar directamente a la página home sin pasar por el login,
           de modo que el sistema debe enviarlo al login para que inicie sesión.
         */
-        this.router.navigate(['/login']);
       }
   });
 }
@@ -207,5 +205,7 @@ public verificarArchivoConQR(files: FileList): void {
   };
   img.src = URL.createObjectURL(file);
 }
-
+segmentChanged($event) {
+  this.router.navigate(['home/' + $event.detail.value]);
+}
 }

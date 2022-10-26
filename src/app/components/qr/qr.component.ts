@@ -9,7 +9,7 @@ export class QrComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit() {}
+  public ngOnInit():void {}
 
   
 }
