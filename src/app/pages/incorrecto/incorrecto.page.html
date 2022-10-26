@@ -1,0 +1,31 @@
+<ion-content color="secondary">  
+
+  <ion-title class="ion-padding-top ion-text-center">
+    <ion-label>
+      <ion-img src="../assets/images/logo_duoc.png"></ion-img>
+      <h1>Sistema Asistencia DUOC</h1>
+    </ion-label>
+  </ion-title>
+
+  <div class="ion-padding-vertical">
+    <ion-card class="ion-text-center">
+      <ion-card-title class="ion-padding-top">
+        <ion-label>Recuperar Contraseña</ion-label>
+      </ion-card-title>
+
+      <ion-card-content>
+        <ion-item>
+          <ion-label class="ion-text-center">
+            <h2>¡Lo sentimos pero los datos que ingresaste son incorrectos!</h2>
+            <h2>Intentalo denuevo</h2>
+          </ion-label>
+        </ion-item>
+        <ion-img src="../assets/images/incorrecto.png" class="correcto"></ion-img>
+        
+        <ion-button (click)="iniciarSesion()" shape="block" fill="clear">
+        Iniciar sesion
+        </ion-button>
+      </ion-card-content>
+    </ion-card>
+  </div>
+</ion-content>
