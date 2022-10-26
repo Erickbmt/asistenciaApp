@@ -14,22 +14,27 @@
           <ion-label>Inicio</ion-label>
         </ion-segment-button>
   
-        <ion-segment-button value="Qr">
-          <ion-icon name="qr-code-outline "></ion-icon>
+        <ion-segment-button value="qr">
+          <ion-icon name="camera-outline "></ion-icon>
           <ion-label>Qr</ion-label>
         </ion-segment-button>
 
-          <ion-segment-button value="mi-clase">
-            <ion-icon name="calendar-outline"></ion-icon>
-            <ion-label>Mi clase</ion-label>
-          </ion-segment-button>
+        <ion-segment-button value="mi-clase">
+          <ion-icon name="calendar-outline"></ion-icon>
+          <ion-label>Mi clase</ion-label>
+        </ion-segment-button>
+        
+        <ion-segment-button value="foro">
+          <ion-icon name="chatbubbles-outline"></ion-icon>
+          <ion-label>Foro</ion-label>
+        </ion-segment-button>
 
       </ion-segment>
     </ion-toolbar>
   </ion-header>
 
   <ion-content>
-    <ion-router-outlet>no</ion-router-outlet>
+    <ion-router-outlet></ion-router-outlet>
   </ion-content>
   
   <ion-footer color="tertiary">

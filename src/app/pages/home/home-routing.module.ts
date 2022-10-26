@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomePage } from './home.page';
 import { MiClaseComponent } from 'src/app/components/mi-clase/mi-clase.component';
+import { ForoComponent } from 'src/app/components/foro/foro.component';
 
 const routes: Routes = [
   {
@@ -22,6 +23,10 @@ const routes: Routes = [
       {
         path: 'mi-clase',
         component: MiClaseComponent
+      },
+      {
+        path: 'foro',
+        component: ForoComponent
       }
     ]
   }
