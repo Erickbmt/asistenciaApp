@@ -19,7 +19,7 @@ export class InicioComponent implements OnInit {
 
   }
   else {
-    this.router.navigate(['/home/inicio']);
+    this.router.navigate(['/login']);
   }
  }
   public  ngOnInit(): void {
