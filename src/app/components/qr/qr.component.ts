@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { BarcodeScanner, SupportedFormat } from '@capacitor-community/barcode-scanner';
 
 @Component({
   selector: 'app-qr',
@@ -7,9 +8,48 @@ import { Component, OnInit } from '@angular/core';
 })
 export class QrComponent implements OnInit {
 
+  escaneando: boolean = false;
+
   constructor() { }
 
   public ngOnInit():void {}
 
-  
+  async checkPermission() {
+    return new Promise(async (resolve, reject) => {
+      const status = await BarcodeScanner.checkPermission({ force: true });
+      if (status.granted) {
+        resolve(true);
+      } else if (status.denied) {
+        BarcodeScanner.openAppSettings();
+        resolve(false);
+      }
+    });
+  }
+
+  async scan() {
+    const allowed = await this.checkPermission();
+    if (allowed) {
+      const aux = document.body.style.background;
+      document.body.style.background = 'transparent';
+      const { hasContent, content } = await BarcodeScanner.startScan({ targetedFormats: [SupportedFormat.QR_CODE] });
+      document.body.style.background = aux;
+      if (hasContent) {
+        return content;
+      }
+      alert('No fue posible detectar un código QR');
+      return '';
+    }
+    alert('Para escanear un código QR debe otorgar permisos para la cámara');
+    return '';
+  }
+
+  async stop() {
+    BarcodeScanner.stopScan();
+  }
+
+  ionViewWillLeave() {
+    BarcodeScanner.stopScan();
+    this.escaneando = false;
+  }
+
 }

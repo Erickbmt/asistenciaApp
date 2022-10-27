@@ -1,12 +1,13 @@
-import { LoginPage } from './../login/login.page';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
-import { AlertController } from '@ionic/angular';
+import { AlertController, ViewWillLeave } from '@ionic/angular';
 import { Usuario } from 'src/app/model/Usuario';
 import { AfterViewInit, ElementRef, ViewChild } from '@angular/core';
+// Animacion
 import { Animation, AnimationController} from '@ionic/angular';
-import { LoadingController } from '@ionic/angular';
-import jsQR, { QRCode } from 'jsqr';
+// Componentes
+import { QrComponent } from 'src/app/components/qr/qr.component';
+import { MiClaseComponent } from 'src/app/components/mi-clase/mi-clase.component';
 
 
 @Component({
@@ -17,23 +18,17 @@ import jsQR, { QRCode } from 'jsqr';
 
 export class HomePage implements OnInit, AfterViewInit {
 
+  // Animacion
   @ViewChild('titulo', { read: ElementRef, static: true}) titulo: ElementRef;
   @ViewChild('qrAnimado', { read: ElementRef, static: true}) qrAnimado: ElementRef;
 
-  @ViewChild('video', { static: false })
-  private video: ElementRef;
+  // Componentes
+  // @ViewChild(QrComponent) qrreader : QrComponent;
+  // @ViewChild(MiClaseComponent) clase: MiClaseComponent;
 
-  @ViewChild('canvas', { static: false })
-  private canvas: ElementRef;
+  // public escaneando = false;
 
-  @ViewChild('fileinput', { static: false })
-  private fileinput: ElementRef;
-
-  public escaneando = false;
-  public datosClases = false;
-  public datosQR = '';
-  public loading: HTMLIonLoadingElement = null;
-
+  // mostrarqr = false;
 
 
   public usuario: Usuario;
@@ -42,8 +37,7 @@ export class HomePage implements OnInit, AfterViewInit {
         private activeroute: ActivatedRoute
       , private router: Router
       , private alertController: AlertController
-      , private animationController: AnimationController
-      , private loadingController: LoadingController) {
+      , private animationController: AnimationController) {
     
     
     this.activeroute.queryParams.subscribe(params => {
@@ -63,6 +57,23 @@ export class HomePage implements OnInit, AfterViewInit {
 public ngOnInit() {
 
 }
+// ---------------------- Qr ---------------------------
+// async showComponent(name: string) {
+//   this.mostrarqr = name === 'qrreader';
+
+//   if (name === 'qrreader') {
+//     const content = await this.qrreader.scan();
+//     await this.storage.saveQR(content);
+//     this.mostrarqr = false;
+//     this.clase.mostrarDatosQr();
+//   } else {
+//     this.qrreader.stop();
+//   }
+// }
+
+// ionViewWillLeave(): void {
+//   this.qrreader.stop();
+// }
 
 // Metodo de navegar pero para el componente de inicio
 public inicioComponente(): void {
