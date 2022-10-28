@@ -122,4 +122,5 @@ public cerrarSesion(): void {
 segmentChanged($event) {
   this.router.navigate(['home/' + $event.detail.value]);
 }
+
 }
