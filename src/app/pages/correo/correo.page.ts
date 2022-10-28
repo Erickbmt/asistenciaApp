@@ -12,7 +12,7 @@ export class CorreoPage implements OnInit {
 
   public usuario: Usuario;
   constructor(private router: Router, private toastController: ToastController) {
-    this.usuario = new Usuario('','','','','');
+    // this.usuario = new Usuario('','','','','');
     this.usuario.nombre = '';
     this.usuario.correo = '';
     this.usuario.pregunta = '';
@@ -22,14 +22,14 @@ export class CorreoPage implements OnInit {
   }
 
   // Validar si el correo ingresado es alguno de estos usuarios
-  public ingresar(): void {
+  // public ingresar(): void {
 
-    if(!this.validarUsuario(this.usuario)) {
-      return;
-    }
+  //   if(!this.validarUsuario(this.usuario)) {
+  //     return;
+  //   }
 
-    this.ingresoUsuario();
-  }
+  //   this.ingresoUsuario();
+  // }
 
   // Para navegar hacia preguntas
   public ingresoUsuario(): void {
@@ -44,18 +44,18 @@ export class CorreoPage implements OnInit {
   }
 
   // Validacion del correo del usuario
-  public validarUsuario(usuario: Usuario): boolean {
-    const user = usuario.buscarCorreoValido(this.usuario.correo);
+  // public validarUsuario(usuario: Usuario): boolean {
+  //   const user = usuario.buscarCorreoValido(this.usuario.correo);
 
-    if (user) {
-      this.usuario= user;
-      return true;
-    }
-    else {
-      this.mostrarMensaje('Correo no valido')
-      return false;
-    }
-  }
+  //   if (user) {
+  //     this.usuario= user;
+  //     return true;
+  //   }
+  //   else {
+  //     this.mostrarMensaje('Correo no valido')
+  //     return false;
+  //   }
+  // }
 
   // Navegacion
 

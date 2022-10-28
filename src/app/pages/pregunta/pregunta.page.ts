@@ -46,37 +46,37 @@ export class PreguntaPage implements OnInit {
   Si el correo ingresado con anterioridad es igual a este y su contraseña es igual a esta entonces
   navegara a la pagina correcto si no un error.
 */
-  public ingresarRespuesta(): void {
-    if (!this.validarRespuesta(this.usuario)){
-      return;
-    }
-    this.recuperarContrasena();
-  }
-  // Navegar despues de responde la pregunta hacia la pagina Correcto o Incorrecto
-  public recuperarContrasena(): void {
+  // public ingresarRespuesta(): void {
+  //   if (!this.validarRespuesta(this.usuario)){
+  //     return;
+  //   }
+  //   this.recuperarContrasena();
+  // }
+  // // Navegar despues de responde la pregunta hacia la pagina Correcto o Incorrecto
+  // public recuperarContrasena(): void {
 
-    const navigationExtras: NavigationExtras = {
-      state: {
-        usuario: this.usuario
-      }
-    };
-    this.router.navigate(['/correcto'], navigationExtras);
-  }
+  //   const navigationExtras: NavigationExtras = {
+  //     state: {
+  //       usuario: this.usuario
+  //     }
+  //   };
+  //   this.router.navigate(['/correcto'], navigationExtras);
+  // }
 
 // -------------------- Validar errores ---------------------
   // Validar respuesta cuando no haya nada puesto
-  public validarRespuesta(usuario: Usuario): boolean {
-    const user = usuario.buscarRespuestaValida(this.usuario.respuesta);
+  // public validarRespuesta(usuario: Usuario): boolean {
+  //   const user = usuario.buscarRespuestaValida(this.usuario.respuesta);
 
-    if (user) {
-      this.usuario= user;
-      return true;
-    }
-    else {
-      this.incorrecto();
-      return false;
-    }
-  }
+  //   if (user) {
+  //     this.usuario= user;
+  //     return true;
+  //   }
+  //   else {
+  //     this.incorrecto();
+  //     return false;
+  //   }
+  // }
   // Mostrar mensaje
   async mostrarMensaje(mensaje: string, duracion?: number) {
     const toast = await this.toastController.create({

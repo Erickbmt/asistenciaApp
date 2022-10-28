@@ -1,3 +1,7 @@
+import { DatabaseService } from "../services/database.service";
+import { SqliteService } from "../services/sqlite.service";
+import { showAlertDUOC } from "./Message";
+
 export class Usuario {
   // Definir variables
   public correo = '';
@@ -5,65 +9,74 @@ export class Usuario {
   public nombre = '';
   public pregunta = '';
   public respuesta = '';
+  public sesionActiva = '';
 
-  constructor (correo:string, password:string, nombre:string, pregunta:string, respuesta: string){
+  constructor (){
+  }
+// SET USUARIO PARA USARLO CON LAS AUTENTIFICACIONES Y EL STORAGE
+  setUser(correo: string,
+    password: string,
+    nombre: string,
+    preguntaSecreta: string,
+    respuestaSecreta: string,
+    sesionActiva: string,
+    hideSecrets: boolean)
+{
     this.correo = correo;
-    this.password = password;
     this.nombre = nombre;
-    this.pregunta = pregunta;
-    this.respuesta = respuesta;
-  }
-// Lista y funcion para la lista con usuarios
-  public listaValidaUsuarios(): Usuario[] {
-    const lista = []
-
-    lista.push(new Usuario('atorres@duocuc.cl', '1234', 'Ana Torres Leiva'
-      , '¿Cuál es tu animal favorito?', 'gato'));
-    lista.push(new Usuario('jperez@duocuc.cl', '5678', 'Juan Pérez González'
-      , '¿Cuál es tu postre favorito?', 'panqueques'));
-    lista.push(new Usuario('cmujica@duocuc.cl', '0987', 'Carla Mujica Sáez'
-      , '¿Cuál es tu vehículo favorito?', 'moto'));
-    return lista;
-
-  }
-
-// Para validar las credenciales de la contraseña y el correo
-  public buscarUsuarioValido(correo: string, password: string): Usuario {
-    return this.listaValidaUsuarios().find(
-      user => user.correo === correo && user.password === password);
-  }
+    this.sesionActiva = sesionActiva;
+    if (hideSecrets) {
+      this.password = '';
+      this.pregunta = '';
+      this.respuesta = '';
+    
+    } else {
+      this.password = password;
+      this.pregunta = preguntaSecreta;
+      this.respuesta = respuestaSecreta;
+    }
+}
 
 // Validar solo correo
-public buscarCorreoValido(correo: string): Usuario {
-  return this.listaValidaUsuarios().find(
-    user => user.correo === correo);
+  public validarCorreo(correo: string): string {
+    if (this.correo.trim() === '') return 'Las credenciales no son validas';
+    return '';
   }
 
-// Validar solo respuesta a la pregunta
-  public buscarRespuestaValida(respuesta:String): Usuario {
-    return this.listaValidaUsuarios().find(
-      user => user.respuesta === respuesta);
-  }
+// Validar contraseña
+
+public validarPassword(correo: string): string {
+  if (this.password.trim() === '') return 'Las credenciales no son validas';
+
+  return '';
+}
 
 //---------------------- Validaciones ------------------------------
-  public validarcorreo(): string {
-    if (this.correo.trim() === '') {
-      return 'Para ingresar al sistema debe digitar su Correo Electrónico.';
+async validateUser(correo: string, password: string, db: DatabaseService): Promise<boolean> {
+  return new Promise(async (resolve) => {
+    let msg = this.validarCorreo(correo);
+    if (msg) {
+      await showAlertDUOC(msg);
+      return Promise.resolve(false);
     }
-    if (this.correo.length < 10 || this.correo.length > 25) {
-      return 'El nombre de usuario debe tener entre 10 y 25 caracteres.';
+    msg = this.validarPassword(password);
+    if (msg) {
+      await showAlertDUOC(msg);
+      return Promise.resolve(false);
     }
-    return '';
-  }
-
-  public validarPassword(): string {
-    if (this.password.trim() === '') {
-      return 'Para entrar al sistema debe ingresar la contraseña.';
+    const usu = await db.readUser(correo, password, true);
+    if (usu === null) {
+      await showAlertDUOC('El correo o la contraseña no son correctos');
+      return Promise.resolve(null);
     }
-    if (this.password.length !== 4) {
-      return 'La contraseña debe ser numérica de 4 dígitos.';
-    }
-    return '';
-  }
+    this.correo = usu.correo;
+    this.nombre = usu.nombre;
+    this.sesionActiva = usu.sesionActiva;
+    this.password = usu.password;
+    this.pregunta = usu.pregunta;
+    this.respuesta = usu.respuesta;
+    return Promise.resolve(usu);
+  });
+}
 }
 
