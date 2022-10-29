@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Platform } from '@ionic/angular';
 import { log } from './model/Message';
-import { AuthenticationService } from './services/authentication.service';
+import { AuthService } from './services/authentication.service';
 import { DatabaseService } from './services/database.service';
 
 @Component({
@@ -15,7 +15,7 @@ export class AppComponent {
   constructor(
     private platform: Platform,
     private db: DatabaseService,
-    private auth: AuthenticationService,
+    private auth: AuthService,
     private router: Router
   ) {
     this.StartApp();

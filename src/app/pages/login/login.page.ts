@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { capSQLiteChanges } from '@capacitor-community/sqlite';
 import { DatabaseService } from './../../services/database.service';
 import { log, showAlertDUOC, showAlertYesNoDUOC, showToast } from 'src/app/model/Message';
-import { AuthenticationService } from 'src/app/services/authentication.service';
+import { AuthService } from 'src/app/services/authentication.service';
 import { MessageEnum } from 'src/app/model/MessageEnum';
 
 
@@ -16,7 +16,7 @@ export class LoginPage{
 
   correo: string = '';
   password: string = '';
-  constructor(private auth: AuthenticationService, private db: DatabaseService) {
+  constructor(private auth: AuthService, private db: DatabaseService) {
     this.correo = 'atorres@duocuc.cl';
     this.password = '1234';
 

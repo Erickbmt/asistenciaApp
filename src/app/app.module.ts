@@ -7,10 +7,10 @@ import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from  '@angular/common/http';
-import { SqliteService } from './services/sqlite.service';
+import { SQLiteService } from './services/sqlite.service';
 import { AuthGuardService } from './services/auth-guard.service';
 import { DatabaseService } from './services/database.service';
-import { AuthenticationService } from './services/authentication.service';
+import { AuthService } from './services/authentication.service';
 import { StorageService } from './services/storage.service';
 
 
@@ -18,10 +18,10 @@ import { StorageService } from './services/storage.service';
   declarations: [AppComponent],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule],
   providers:[
-  SqliteService,
+  SQLiteService,
   AuthGuardService,
   DatabaseService,
-  AuthenticationService,
+  AuthService,
   StorageService,
    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],

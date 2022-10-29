@@ -15,7 +15,7 @@ export class CorreoPage implements OnInit {
     // this.usuario = new Usuario('','','','','');
     this.usuario.nombre = '';
     this.usuario.correo = '';
-    this.usuario.pregunta = '';
+    this.usuario.preguntaSecreta = '';
   }
 
   ngOnInit() {

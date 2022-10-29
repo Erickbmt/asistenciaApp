@@ -1,14 +1,14 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, Router, UrlTree } from '@angular/router';
 import { log } from '../model/Message';
-import { AuthenticationService } from './authentication.service';
+import { AuthService } from './authentication.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LoginGuardService implements CanActivate {
 
-  constructor(public auth: AuthenticationService, public router: Router) { }
+  constructor(public auth: AuthService, public router: Router) { }
   
   async canActivate(): Promise<boolean | UrlTree> {
     

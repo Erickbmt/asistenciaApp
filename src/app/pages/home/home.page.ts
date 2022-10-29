@@ -10,7 +10,7 @@ import { QrComponent } from 'src/app/components/qr/qr.component';
 import { MiClaseComponent } from 'src/app/components/mi-clase/mi-clase.component';
 // Storage
 import { StorageService } from 'src/app/services/storage.service';
-import { AuthenticationService } from 'src/app/services/authentication.service';
+import { AuthService } from 'src/app/services/authentication.service';
 
 
 @Component({
@@ -42,7 +42,7 @@ export class HomePage implements OnInit, AfterViewInit {
       , private alertController: AlertController
       , private animationController: AnimationController
       , private storage: StorageService
-      , private auth: AuthenticationService) {
+      , private auth: AuthService) {
     
     
     this.activeroute.queryParams.subscribe(params => {
