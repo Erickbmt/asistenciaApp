@@ -65,8 +65,8 @@ export class StorageService {
                       json.correo, 
                       json.password, 
                       json.nombre, 
-                      json.preguntaSecreta, 
-                      json.respuestaSecreta, 
+                      json.pregunta, 
+                      json.respuesta, 
                       json.sesionActiva, 
                       hideSecrets
                   );

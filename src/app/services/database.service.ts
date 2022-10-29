@@ -3,9 +3,7 @@ import { capSQLiteChanges, DBSQLiteValues} from '@capacitor-community/sqlite';
 import { Usuario } from '../model/Usuario';
 import { SqliteService } from './sqlite.service';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 
 export class DatabaseService {
 
@@ -14,25 +12,25 @@ export class DatabaseService {
           correo TEXT PRIMARY KEY NOT NULL,
           password TEXT NOT NULL,
           nombre TEXT NOT NULL,
-          preguntaSecreta TEXT NOT NULL,
-          respuestaSecreta TEXT NOT NULL,
+          pregunta TEXT NOT NULL,
+          respuesta TEXT NOT NULL,
           sesionActiva TEXT NOT NULL
       );
   `;
-  sqlInsertUser = 'INSERT INTO Usuario (correo, password, nombre, preguntaSecreta, respuestaSecreta, sesionActiva) VALUES (?,?,?,?,?,?)';
+  sqlInsertUser = 'INSERT INTO Usuario (correo, password, nombre, pregunta, respuesta, sesionActiva) VALUES (?,?,?,?,?,?)';
   sqlSelectUser = 'SELECT * FROM Usuario WHERE correo=? AND password=? LIMIT 1';
-  sqlSelectAllUsers = 'SELECT * FROM Usuario';
-  sqlUpdateActiveSesion = 'UPDATE Usuario SET sesionActiva=? WHERE correo=?';
+  sqlSelectAllUsers = 'SELECT * FROM USUARIO';
+  sqlUpdateActiveSesion = 'UPDATE USUARIO SET sesionActiva=? WHERE correo=?';
   sqlSelectActiveSession = `SELECT correo, sesionActiva FROM Usuario WHERE sesionActiva = 'S' LIMIT 1`;
-  sqlUpdateUser = `UPDATE USUARIO SET 
+  sqlUpdateUser = `UPDATE Usuario SET 
               password = ?, 
               nombre = ?, 
-              preguntaSecreta = ?, 
-              respuestaSecreta = ?, 
+              pregunta = ?, 
+              respuesta = ?, 
               sesionActiva = ?
           WHERE
               correo = ?`;
-  sqlDeleteUser = 'DELETE FROM USUARIO WHERE correo = ?';
+  sqlDeleteUser = 'DELETE FROM Usuario WHERE correo = ?';
 
   constructor(private sqlite: SqliteService) { }
   
@@ -40,8 +38,8 @@ export class DatabaseService {
       return this.sqlite.StartSQLiteService(this.createSchema, createDatabaseFromScratch, 'StartDatabaseService');
   }
 
-  async createUser(correo: string, password: string, nombre: string, preguntaSecreta: string, respuestaSecreta: string, sesionActiva: string): Promise<capSQLiteChanges> {
-      return await this.sqlite.run(this.sqlInsertUser, [correo, password, nombre, preguntaSecreta, respuestaSecreta, sesionActiva]);
+  async createUser(correo: string, password: string, nombre: string, pregunta: string, respuesta: string, sesionActiva: string): Promise<capSQLiteChanges> {
+      return await this.sqlite.run(this.sqlInsertUser, [correo, password, nombre, pregunta, respuesta, sesionActiva]);
   }
 
   async readUsers(): Promise<DBSQLiteValues> {
@@ -57,8 +55,8 @@ export class DatabaseService {
           r.correo, 
           r.password, 
           r.nombre, 
-          r.preguntaSecreta, 
-          r.respuestaSecreta, 
+          r.pregunta, 
+          r.respuesta, 
           r.sesionActiva, 
           hideSecrets
       );
@@ -71,8 +69,8 @@ export class DatabaseService {
       rs.values.forEach((value, index) => {
           console.log(
               `Correo ${index}: ${value.correo}, ${value.password}, ` +
-              `${value.nombre}, ${value.preguntaSecreta}, ` +
-              `${value.respuestaSecreta}, ` +
+              `${value.nombre}, ${value.pregunta}, ` +
+              `${value.respuesta}, ` +
               `${value.sesionActiva}`
           );
       });
@@ -93,15 +91,15 @@ export class DatabaseService {
           let usu = new Usuario();
           if (hideSecrets) {
               r.password = '';
-              r.preguntaSecreta = '';
-              r.respuestaSecreta = '';
+              r.pregunta = '';
+              r.respuesta = '';
           }
           usu.setUser(
               r.correo, 
               r.password, 
               r.nombre, 
-              r.preguntaSecreta, 
-              r.respuestaSecreta, 
+              r.pregunta, 
+              r.respuesta, 
               r.sesionActiva, 
               hideSecrets
           );

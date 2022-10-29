@@ -6,9 +6,7 @@ import {
 } from '@capacitor-community/sqlite';
 import { log, showAlertError } from '../model/Message';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 
 export class SqliteService {
   platform: string;
@@ -25,13 +23,13 @@ export class SqliteService {
   dbChanges: capSQLiteChanges;
   changes: number;
   isRunning: boolean;
-  sqlInsertUser = 'INSERT INTO Usuario (correo, password, nombre, preguntaSecreta, respuestaSecreta, sesionActiva) VALUES (?,?,?,?,?,?)';
-  sqlSelectAllUsers = 'SELECT * FROM Usuario';
+  sqlInsertUser = 'INSERT INTO USUARIO (correo, password, nombre, pregunta, respuesta, sesionActiva) VALUES (?,?,?,?,?,?)';
+  sqlSelectAllUsers = 'SELECT * FROM USUARIO';
 
   constructor() { }
   
-  async createUser(correo: string, password: string, nombre: string, preguntaSecreta: string, respuestaSecreta: string, sesionActiva: string): Promise<capSQLiteChanges> {
-      return await this.run(this.sqlInsertUser, [correo, password, nombre, preguntaSecreta, respuestaSecreta, sesionActiva]);
+  async createUser(correo: string, password: string, nombre: string, pregunta: string, respuesta: string, sesionActiva: string): Promise<capSQLiteChanges> {
+      return await this.run(this.sqlInsertUser, [correo, password, nombre, pregunta, respuesta, sesionActiva]);
   }
 
   StartSQLiteService(createSchema: string, createDatabaseFromScratch: boolean, callee: string): Promise<boolean> {
@@ -58,7 +56,7 @@ export class SqliteService {
               this.db.open();
               if (createDatabaseFromScratch) {
                   await this.db.execute(createSchema);
-                  await this.createUser('atorres@duocuc.cl', '1234', 'Ana Torres Leiva', '¿Cuál es tu animal favorito?', 'gato', 'S');
+                  await this.createUser('atorres@duocuc.cl', '1234', 'Ana Torres Leiva', '¿Cuál es tu animal favorito?', 'gato', 'N');
                   await this.createUser('jperez@duocuc.cl', '5678', 'Juan Pérez González', '¿Cuál es tu postre favorito?', 'panqueques', 'N');
                   await this.createUser('cmujica@duocuc.cl', '0987', 'Carla Mujica Sáez', '¿Cuál es tu vehículo favorito?', 'moto', 'N');
               }
@@ -67,8 +65,8 @@ export class SqliteService {
               rs.values.forEach((value, index) => {
                   log('StartSQLiteService', 
                       `Usuario ${index}: ${value.correo}, ${value.password}, ${value.sesionActiva}` 
-                      + `${value.nombre}, ${value.preguntaSecreta}, ` 
-                      + `${value.respuestaSecreta}, ` 
+                      + `${value.nombre}, ${value.pregunta}, ` 
+                      + `${value.respuesta}, ` 
                       + `${value.sesionActiva}`
                   );
               });

@@ -12,42 +12,17 @@ import { MessageEnum } from 'src/app/model/MessageEnum';
   templateUrl: './login.page.html',
   styleUrls: ['./login.page.scss'],
 })
-export class LoginPage implements OnInit{
+export class LoginPage{
 
   correo: string = '';
   password: string = '';
-  darkMode: boolean = false;
-
   constructor(private auth: AuthenticationService, private db: DatabaseService) {
-  }
+    this.correo = 'atorres@duocuc.cl';
+    this.password = '1234';
 
-  ngOnInit() {
-      
   }
-
   async ingresar() {
     this.auth.login(this.correo, this.password);
   }
-
-  async eliminar() {
-    log('eliminar', 'Mostrar usuarios antes de eliminar');
-    this.db.logUsers();
-    const resp1: MessageEnum = await showAlertYesNoDUOC(`¿Desea eliminar al usuario ${this.correo} ?`);
-    if (resp1 === MessageEnum.YES) {
-      const resp2: capSQLiteChanges = await this.db.deleteUser(this.correo);
-      if (resp2.changes.changes === 1) {
-        await showAlertDUOC(`El usuario ${this.correo} fue eliminado correctamente.`);
-      } else {
-        await showAlertDUOC(`El usuario ${this.correo} no existe en la base de datos.`);
-      }
-    }
-    log('eliminar', 'Mostrar usuarios después de eliminar');
-    this.db.logUsers();
-  }
-
-  registrar() {
-    showAlertDUOC('Programa aquí el registro de nuevos usuarios.');
-  }
-
 }
 

@@ -17,8 +17,8 @@ export class Usuario {
   setUser(correo: string,
     password: string,
     nombre: string,
-    preguntaSecreta: string,
-    respuestaSecreta: string,
+    pregunta: string,
+    respuesta: string,
     sesionActiva: string,
     hideSecrets: boolean)
 {
@@ -32,16 +32,16 @@ export class Usuario {
     
     } else {
       this.password = password;
-      this.pregunta = preguntaSecreta;
-      this.respuesta = respuestaSecreta;
+      this.pregunta = pregunta;
+      this.respuesta = respuesta;
     }
 }
 
 // Validar solo correo
-  public validarCorreo(correo: string): string {
-    if (this.correo.trim() === '') return 'Las credenciales no son validas';
-    return '';
-  }
+public validarCorreo(correo: string): string {
+  if (this.correo.trim() === '') return 'Las credenciales no son validas';
+  return '';
+}
 
 // Validar contraseña
 

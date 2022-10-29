@@ -8,6 +8,9 @@ import { Animation, AnimationController} from '@ionic/angular';
 // Componentes
 import { QrComponent } from 'src/app/components/qr/qr.component';
 import { MiClaseComponent } from 'src/app/components/mi-clase/mi-clase.component';
+// Storage
+import { StorageService } from 'src/app/services/storage.service';
+import { AuthenticationService } from 'src/app/services/authentication.service';
 
 
 @Component({
@@ -37,7 +40,9 @@ export class HomePage implements OnInit, AfterViewInit {
         private activeroute: ActivatedRoute
       , private router: Router
       , private alertController: AlertController
-      , private animationController: AnimationController) {
+      , private animationController: AnimationController
+      , private storage: StorageService
+      , private auth: AuthenticationService) {
     
     
     this.activeroute.queryParams.subscribe(params => {
@@ -54,9 +59,13 @@ export class HomePage implements OnInit, AfterViewInit {
   });
 }
 
-public ngOnInit() {
-
+ngOnInit() {
+    
 }
+
+// async ngOnInit(): Promise<void> {
+//   console.log('ESTOY EN HOME PAGE ', await this.storage.getItem('USER_DATA'));
+// }
 // ---------------------- Qr ---------------------------
 // async showComponent(name: string) {
 //   this.mostrarqr = name === 'qrreader';
@@ -110,17 +119,16 @@ public animateButton() {
 // -----------------------------------------------------------
 
 // Para el cerrar sesion bruh
-public cerrarSesion(): void {
-  for (const [key, value] of Object.entries(this.usuario)) {
-      Object.defineProperty(this.usuario, key, {value: ''});
-
-      this.router.navigate(['/login']);
-    }
-  }
+salir() {
+  this.auth.logout();
+}
 
 // Funcion para el cambio de componentes
 segmentChanged($event) {
   this.router.navigate(['home/' + $event.detail.value]);
 }
 
+public login(): void {
+  this.router.navigate(['/login']);
+}
 }

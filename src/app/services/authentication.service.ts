@@ -8,21 +8,21 @@ import { capSQLiteChanges } from '@capacitor-community/sqlite';
 import { Router } from '@angular/router';
 import { capValueResult } from 'capacitor-data-storage-sqlite';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class AuthenticationService {
 
   authState = new BehaviorSubject(false);
   loginState = new BehaviorSubject(false);
+  usuario = new Usuario();
 
 
   constructor(
       private router: Router,
       private storage: StorageService,
       private db: DatabaseService) 
+
   { 
-      
+
   }
 
   async StartAuthService(): Promise<boolean> {
@@ -35,6 +35,7 @@ export class AuthenticationService {
           log('isLogged', autenticado? 'El usuario ha iniciado sesión': 'El usuario no ha iniciado sesión');
           if (autenticado) {
               this.authState.next(true);
+              
           }
           return true;
       });
@@ -54,8 +55,9 @@ export class AuthenticationService {
       console.log('Iniciando login');
       try {
           await this.StartAuthService();
+          
           log('login', `Obteniendo datos del usuario`);
-          const data: capValueResult = await this.storage.getItem("USER_DATA");
+          const data: capValueResult = await this.storage.getItem('USER_DATA');
 
           if (data !== null) {
               if (data.value !== '') {
@@ -75,13 +77,13 @@ export class AuthenticationService {
               return;
           }
           console.log('AuthenticationService.login El usuario fue autenticado');
-          const resp = await this.db.updateActiveSession(correo, 'S');
+          const resp = await this.db.updateActiveSession('S', usu.correo);
           if (resp.changes.changes === 1) {
               showToast(`¡Bienvenido(a) ${usu.nombre}!`);
               await this.storage.setItem('USER_DATA', JSON.stringify(usu));
               await this.db.logUsers();
               this.authState.next(true);
-              this.router.navigate(['home']);
+              this.router.navigate(['/home']);
           } else {
               console.log(`No fue posible actualizar la sesión`);
           }
