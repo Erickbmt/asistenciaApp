@@ -27,7 +27,9 @@ export class InicioComponent implements OnInit {
  constructor (private router : Router, private storage: StorageService ){
  }
 ngOnInit() {
-    
+    this.storage.getItem('USER_DATA').then(({ value }) => { 
+      this.usuario=JSON.parse(value);      
+     });
 }
 
 }
