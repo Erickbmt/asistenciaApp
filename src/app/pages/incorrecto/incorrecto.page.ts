@@ -16,17 +16,7 @@ export class IncorrectoPage implements OnInit {
   // Y aun recibiendo datos vacios me dejara permanecer en la pagina
   // Para que asi tenga que pasar por el proceso de Recuperar contraseña y no entrar directamente a la pagina
   // Explicadiña rapida del codigo por erick kieeee
-  constructor( private activatedroute: ActivatedRoute, private router: Router) {
-
-    this.activatedroute.queryParams.subscribe (params => {
-      if(this.router.getCurrentNavigation().extras.state){
-        this.usuario = this.router.getCurrentNavigation().extras.state.usuario;
-      }
-      else{
-        this.router.navigate(['/login']);
-      }
-    });
-  }
+  constructor( private activatedroute: ActivatedRoute, private router: Router) {}
 
   ngOnInit() {
   }

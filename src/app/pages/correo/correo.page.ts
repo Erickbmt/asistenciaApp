@@ -12,23 +12,14 @@ export class CorreoPage implements OnInit {
 
   public usuario: Usuario;
   constructor(private router: Router, private toastController: ToastController) {
-    this.usuario.nombre = '';
-    this.usuario.correo = '';
-    this.usuario.preguntaSecreta = '';
   }
 
   ngOnInit() {
   }
 
   // Para navegar hacia preguntas
-  public ingresoUsuario(): void {
-
-    const navigationExtras: NavigationExtras = {
-      state: {
-        usuario: this.usuario
-      }
-    };
-    this.router.navigate(['/pregunta'], navigationExtras);
+  public ingresar(): void {
+    this.router.navigate(['/pregunta']);
 
   }
 
@@ -40,12 +31,8 @@ export class CorreoPage implements OnInit {
   }
 
   // Mensaje de error
-  async mostrarMensaje(mensaje: string, duracion?: number) {
-    const toast = await this.toastController.create({
-        message: mensaje,
-        duration: duracion? duracion: 2000
-      });
-    toast.present();
-  }
+ 
+
+  
 }
 

@@ -5,6 +5,7 @@ import { log, showAlertDUOC, showAlertYesNoDUOC, showToast } from 'src/app/model
 import { AuthService } from 'src/app/services/authentication.service';
 import { MessageEnum } from 'src/app/model/MessageEnum';
 import { Router, NavigationExtras } from '@angular/router';
+import { StorageService } from 'src/app/services/storage.service';
 
 
 
@@ -17,14 +18,17 @@ export class LoginPage{
 
   correo: string = '';
   password: string = '';
-  constructor(private auth: AuthService, private db: DatabaseService, private router : Router) {
+  constructor(private auth: AuthService, private db: DatabaseService, private router : Router, private storage: StorageService) {
     this.correo = 'atorres@duocuc.cl';
     this.password = '1234';
+    
 
   }
   async ingresar() {
     this.auth.login(this.correo, this.password);
   }
+ 
+
 
   public ingresoCorreo(): void {
     this.router.navigate(['/correo']);

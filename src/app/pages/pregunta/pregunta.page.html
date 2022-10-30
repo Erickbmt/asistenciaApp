@@ -13,14 +13,14 @@
         <ion-label>Recuperar Contraseña</ion-label>
         <br>
         <br>  
-        <ion-label position="floating">Paso 2: ¡Responde tú pregunta secreta <hr> {{usuario.nombre}}! </ion-label>
+        <ion-label position="floating">Paso 2: ¡Responde tú pregunta secreta! <hr></ion-label>
         <br>
       </ion-card-title>
       <hr>
       <ion-card-content>
         <ion-item class="ion-padding-top">
           <ion-label *ngIf="usuario" position="floating">{{usuario.pregunta}}</ion-label>
-          <ion-input type="text" placeholder="Responda la pregunta secreta" [(ngModel)]="usuario.respuesta"></ion-input>
+          <ion-input type="text" placeholder="Responda la pregunta secreta" ></ion-input>
         </ion-item>
         <ion-row>
           <ion-col size="12">
