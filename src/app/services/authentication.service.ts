@@ -61,7 +61,7 @@ export class AuthService {
                     const usu = JSON.parse(data.value);
                     console.log(`USUARIO ${usu.nombre} HA INICIADO SESION (isLogged)`);
                     this.authState.next(true);
-                    this.router.navigate(['home']);
+                    this.router.navigate(['/home/inicio']);
                     return;
                 }
             }
@@ -80,7 +80,7 @@ export class AuthService {
                 await this.storage.setItem('USER_DATA', JSON.stringify(usu));
                 await this.db.logUsers();
                 this.authState.next(true);
-                this.router.navigate(['home']);
+                this.router.navigate(['/home/inicio']);
             } else {
                 console.log(`No fue posible actualizar la sesión`);
             }

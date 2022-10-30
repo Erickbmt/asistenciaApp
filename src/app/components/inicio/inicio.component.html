@@ -1,8 +1,9 @@
-<ion-content [fullscreen]="true" class="ion-padding-horizontal">
+<ion-content [fullscreen]="true" class="ion-padding-horizontal" color="dark">
 
-    <ion-item>
+    <ion-item color="secondary">
         <ion-title class="ion-padding-top ion-text-center" style="padding-top: 50px; font-size: x-large; padding-bottom: 50px;">
-            <a>¡Bienvenido(a) {{ nombre }}!</a>
+            <div #nombre *ngIf="usuario"><a>¡Bienvenido(a) {{ usuario.nombre }}!</a></div>
+
         </ion-title>
     </ion-item>
 </ion-content>

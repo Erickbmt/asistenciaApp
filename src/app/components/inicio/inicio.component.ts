@@ -1,6 +1,19 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, NgModule, OnInit } from '@angular/core';
 import { Usuario } from 'src/app/model/Usuario';
 import { ActivatedRoute, Router } from '@angular/router';
+import { StorageService } from 'src/app/services/storage.service';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { IonicModule } from '@ionic/angular';
+
+@NgModule({
+  imports: [
+    CommonModule,
+    FormsModule,
+    IonicModule,
+  ],
+  declarations: [InicioComponent]
+})
 
 @Component({
   selector: 'app-inicio',
@@ -11,19 +24,10 @@ export class InicioComponent implements OnInit {
 
   public usuario : Usuario;
 
- constructor (private router : Router, ){
-  if (this.router.getCurrentNavigation().extras.state) {
-
-    // Si tiene datos extra, se rescatan y se asignan a una propiedad
-    this.usuario = this.router.getCurrentNavigation().extras.state.usuario;
-
-  }
-  else {
-    this.router.navigate(['/login']);
-  }
+ constructor (private router : Router, private storage: StorageService ){
  }
-  public  ngOnInit(): void {
+ngOnInit() {
     
-  }
+}
 
 }

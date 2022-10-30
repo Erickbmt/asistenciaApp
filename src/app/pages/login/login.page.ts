@@ -4,6 +4,7 @@ import { DatabaseService } from './../../services/database.service';
 import { log, showAlertDUOC, showAlertYesNoDUOC, showToast } from 'src/app/model/Message';
 import { AuthService } from 'src/app/services/authentication.service';
 import { MessageEnum } from 'src/app/model/MessageEnum';
+import { Router, NavigationExtras } from '@angular/router';
 
 
 
@@ -16,13 +17,17 @@ export class LoginPage{
 
   correo: string = '';
   password: string = '';
-  constructor(private auth: AuthService, private db: DatabaseService) {
+  constructor(private auth: AuthService, private db: DatabaseService, private router : Router) {
     this.correo = 'atorres@duocuc.cl';
     this.password = '1234';
 
   }
   async ingresar() {
     this.auth.login(this.correo, this.password);
+  }
+
+  public ingresoCorreo(): void {
+    this.router.navigate(['/correo']);
   }
 }
 

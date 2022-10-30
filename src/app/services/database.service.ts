@@ -16,25 +16,6 @@ export class DatabaseService {
             respuestaSecreta TEXT NOT NULL,
             sesionActiva TEXT NOT NULL
         );
-        
-        CREATE TABLE IF NOT EXISTS EXPERIENCIA_LABORAL
-        (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            empresa TEXT NOT NULL,
-            incio INTEGER NOT NULL,
-            trabajoActual TEXT NOT NULL,
-            termino INTEGER,
-            cargo TEXT NOT NULL
-        );
-
-        CREATE TABLE IF NOT EXISTS CERTIFICACION
-        (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            nombre TEXT NOT NULL,
-            fecha TEXT NOT NULL,
-            vencimiento INTEGER NOT NULL,
-            fechaVencimiento TEXT
-        );
     `;
     sqlInsertUser = 'INSERT INTO Usuario (correo, password, nombre, preguntaSecreta, respuestaSecreta, sesionActiva) VALUES (?,?,?,?,?,?)';
     sqlSelectUser = 'SELECT * FROM Usuario WHERE correo=? AND password=? LIMIT 1';

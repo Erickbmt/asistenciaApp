@@ -51,7 +51,6 @@ export class HomePage implements OnInit, AfterViewInit {
         // Si tiene datos extra, se rescatan y se asignan a una propiedad
         this.usuario = this.router.getCurrentNavigation().extras.state.usuario;
         // usamos el metodo anterior para que navege al componente y mandando los datos capturados hacia inicio
-        this.inicioComponente();
       }
       else {
         this.router.navigate(['/login']);
@@ -126,9 +125,5 @@ salir() {
 // Funcion para el cambio de componentes
 segmentChanged($event) {
   this.router.navigate(['home/' + $event.detail.value]);
-}
-
-public login(): void {
-  this.router.navigate(['/login']);
 }
 }

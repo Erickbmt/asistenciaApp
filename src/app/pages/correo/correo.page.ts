@@ -12,7 +12,6 @@ export class CorreoPage implements OnInit {
 
   public usuario: Usuario;
   constructor(private router: Router, private toastController: ToastController) {
-    // this.usuario = new Usuario('','','','','');
     this.usuario.nombre = '';
     this.usuario.correo = '';
     this.usuario.preguntaSecreta = '';
@@ -20,16 +19,6 @@ export class CorreoPage implements OnInit {
 
   ngOnInit() {
   }
-
-  // Validar si el correo ingresado es alguno de estos usuarios
-  // public ingresar(): void {
-
-  //   if(!this.validarUsuario(this.usuario)) {
-  //     return;
-  //   }
-
-  //   this.ingresoUsuario();
-  // }
 
   // Para navegar hacia preguntas
   public ingresoUsuario(): void {
@@ -42,20 +31,6 @@ export class CorreoPage implements OnInit {
     this.router.navigate(['/pregunta'], navigationExtras);
 
   }
-
-  // Validacion del correo del usuario
-  // public validarUsuario(usuario: Usuario): boolean {
-  //   const user = usuario.buscarCorreoValido(this.usuario.correo);
-
-  //   if (user) {
-  //     this.usuario= user;
-  //     return true;
-  //   }
-  //   else {
-  //     this.mostrarMensaje('Correo no valido')
-  //     return false;
-  //   }
-  // }
 
   // Navegacion
 
