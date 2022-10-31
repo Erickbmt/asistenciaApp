@@ -1,13 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { Component,ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
-import { AlertController, ViewWillLeave } from '@ionic/angular';
+import { BarcodeScanner } from '@capacitor-community/barcode-scanner';
+import { Browser } from '@capacitor/browser';
+import { AlertController, ViewWillLeave, ViewDidEnter } from '@ionic/angular';
 import { Usuario } from 'src/app/model/Usuario';
-import { AfterViewInit, ElementRef, ViewChild } from '@angular/core';
+import { AfterViewInit} from '@angular/core';
 // Animacion
 import { Animation, AnimationController} from '@ionic/angular';
 // Componentes
 import { QrComponent } from 'src/app/components/qr/qr.component';
 import { MiClaseComponent } from 'src/app/components/mi-clase/mi-clase.component';
+import { InicioComponent } from 'src/app/components/inicio/inicio.component';
+import { ForoComponent } from 'src/app/components/foro/foro.component';
 // Storage
 import { StorageService } from 'src/app/services/storage.service';
 import { AuthService } from 'src/app/services/authentication.service';
@@ -18,21 +22,25 @@ import { AuthService } from 'src/app/services/authentication.service';
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
 })
-
-export class HomePage implements OnInit, AfterViewInit {
+//deberia arreglarse
+export class HomePage implements AfterViewInit, ViewDidEnter, ViewWillLeave {
 
   // Animacion
   @ViewChild('titulo', { read: ElementRef, static: true}) titulo: ElementRef;
   @ViewChild('qrAnimado', { read: ElementRef, static: true}) qrAnimado: ElementRef;
 
-  // Componentes
-  // @ViewChild(QrComponent) qrreader : QrComponent;
-  // @ViewChild(MiClaseComponent) clase: MiClaseComponent;
+  //Componentes
+  @ViewChild(QrComponent) qr : QrComponent;
+  @ViewChild(MiClaseComponent) miclase: MiClaseComponent;
+  @ViewChild(InicioComponent) inicio: InicioComponent;
+  @ViewChild(ForoComponent) foro: ForoComponent;
 
-  // public escaneando = false;
+  showinicio = true;
+  showqr = false;
+  showmiclase = false;
+  showforo = false;
 
-  // mostrarqr = false;
-
+  selectedComponent = '';
 
   public usuario: Usuario;
 
@@ -43,46 +51,44 @@ export class HomePage implements OnInit, AfterViewInit {
       , private animationController: AnimationController
       , private storage: StorageService
       , private auth: AuthService) {
-    
-    
-    this.activeroute.queryParams.subscribe(params => {
-      if (this.router.getCurrentNavigation().extras.state) {
 
-        // Si tiene datos extra, se rescatan y se asignan a una propiedad
-        this.usuario = this.router.getCurrentNavigation().extras.state.usuario;
-        // usamos el metodo anterior para que navege al componente y mandando los datos capturados hacia inicio
-      }
-      else {
-        this.router.navigate(['/login']);
-      }
-  });
 }
 
-ngOnInit() {
-    
+ionViewDidEnter(): void {
+  this.showComponent('inicio');
 }
 
-// async ngOnInit(): Promise<void> {
-//   console.log('ESTOY EN HOME PAGE ', await this.storage.getItem('USER_DATA'));
-// }
-// ---------------------- Qr ---------------------------
-// async showComponent(name: string) {
-//   this.mostrarqr = name === 'qrreader';
+ionViewWillLeave(): void {
+  this.qr.stop();
+}
 
-//   if (name === 'qrreader') {
-//     const content = await this.qrreader.scan();
-//     await this.storage.saveQR(content);
-//     this.mostrarqr = false;
-//     this.clase.mostrarDatosQr();
-//   } else {
-//     this.qrreader.stop();
-//   }
-// }
+async showComponent(name: string) {
+  this.showinicio = name === 'inicio';
+  this.showqr = name === 'qr';
+  this.showmiclase = name === 'miclase';
+  this.showforo = name === 'foro';
 
-// ionViewWillLeave(): void {
-//   this.qrreader.stop();
-// }
+  if (name === 'qr') {
+    const content = await this.qr.scan();
+    await this.storage.saveQR(content);
+    this.showqr = false;
+    this.selectedComponent = 'miclase';
+    this.showmiclase = true;
+    this.miclase.mostrarDatosQROrdenados();
+  } else {
+    this.qr.stop();
+  }
+}
 
+segmentChanged($event) {
+  this.showComponent($event.detail.value);
+}
+
+async stopScanner() {
+  this.qr.stop();
+  this.showComponent('inicio');
+  this.selectedComponent = 'inicio';
+}
 // Metodo de navegar pero para el componente de inicio
 public inicioComponente(): void {
   const navigationExtras: NavigationExtras = {
@@ -122,8 +128,4 @@ salir() {
   this.auth.logout();
 }
 
-// Funcion para el cambio de componentes
-segmentChanged($event) {
-  this.router.navigate(['home/' + $event.detail.value]);
-}
 }

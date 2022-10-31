@@ -7,12 +7,13 @@ import {
 import { log, showAlertError } from '../model/Message';
 import { Usuario } from '../model/Usuario';
 import { SQLiteService } from './sqlite.service';
+import { Storage } from '@ionic/storage';
 
 @Injectable({
   providedIn: 'root'
 })
 export class StorageService {
-
+    private storage: Storage;
     platform: string;
     isNative: boolean = false;
     store: CapacitorDataStorageSqlitePlugin;
@@ -159,5 +160,20 @@ export class StorageService {
 
     async deleteTable(): Promise<void> {
         return await this.store.deleteTable({ table: this.table });
+    }
+    async saveQR(data: string) {
+        this.set('QR', data);
+    }
+    async getQR() {
+        return this.get('QR');
+    }
+    async clearQr() {
+        await this.storage.remove('QR_DATA');
+    }
+    set(key: string, value: any) {
+        this.storage.set(key, value);
+    }
+    async get(key: string) {
+        return await this.storage.get(key);
     }
 }

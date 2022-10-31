@@ -5,7 +5,20 @@
         <ion-img src="../assets/images/logo_duoc.png" style="max-width: 50%; max-height: 50%;" ></ion-img>
         Sistema de Asistencia DUOC
       </ion-title>
+      <ion-item [hidden]="!showqrreader">
+        <ion-button (click)="stopScanner()" expand="block" shape="round" class="center-margin-auto">
+          Stop scanner
+        </ion-button>
+      </ion-item>
     </ion-toolbar>
+
+    <ion-content [fullscreen]="true" [hidden]="showqr">
+      <app-inicio #inicio [hidden]="!showinicio"></app-inicio>
+      <app-miclase #miclase [hidden]="!showmiclase"></app-miclase>
+      <app-foro #foro [hidden]="!showforo"></app-foro>
+    </ion-content>
+    
+    <app-qr #qr></app-qr>
 
     <ion-toolbar color="secondary">
       <ion-segment value="inicio" (ionChange)="segmentChanged($event)">

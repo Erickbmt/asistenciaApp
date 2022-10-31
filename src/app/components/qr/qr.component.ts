@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { BarcodeScanner, SupportedFormat } from '@capacitor-community/barcode-scanner';
+import { StorageService } from 'src/app/services/storage.service';
 
 @Component({
   selector: 'app-qr',
@@ -15,17 +16,16 @@ export class QrComponent implements OnInit {
   public ngOnInit():void {}
 
   async checkPermission() {
-    return new Promise(async (resolve, reject) => {
-      const status = await BarcodeScanner.checkPermission({ force: true });
-      if (status.granted) {
-        resolve(true);
-      } else if (status.denied) {
+    return new Promise(async (resolve) => {
+      const { granted } = await BarcodeScanner.checkPermission({ force: true });
+      if (!granted) {
         BarcodeScanner.openAppSettings();
         resolve(false);
+        return;
       }
+      resolve(true);
     });
   }
-
   async scan() {
     const allowed = await this.checkPermission();
     if (allowed) {
@@ -45,11 +45,6 @@ export class QrComponent implements OnInit {
 
   async stop() {
     BarcodeScanner.stopScan();
-  }
-
-  ionViewWillLeave() {
-    BarcodeScanner.stopScan();
-    this.escaneando = false;
   }
 
 }
