@@ -12,23 +12,28 @@ export class MiClaseComponent implements OnInit {
   hasData = false;
   jsonEmpty = 
   `{
-  bloqueInicio = "",
-  bloqueTermino = "",
-  dia = "",
-  horaFin = "",
-  idAsignatura = "",
-  horaInicio = "",
-  nombreAsignatura = "",
-  nombreProfesor = "",
-  seccion = "",
-  sede = "",
+  "sede": "",
+  "idAsignatura": "",
+  "seccion": "",
+  "nombreAsignatura": "",
+  "nombreProfesor": "",
+  "dia": "",
+  "bloqueInicio": "",
+  "bloqueTermino": "",
+  "horaInicio": "",
+  "horaFin": ""
   }`;
 
   constructor(private storage: StorageService, private router: Router) { }
 
   async ngOnInit() {
-    this.mostrarDatosQROrdenados();
+    // this.storage.getItem("QR_DATA").then(({ value }) => {
+    //   this.clase = JSON.parse(value);
+     this.mostrarDatosQROrdenados();
+  // })};
   }
+  
+  
 
   async mostrarDatosQROrdenados() {
     this.clase = JSON.parse(this.jsonEmpty);
@@ -48,21 +53,5 @@ export class MiClaseComponent implements OnInit {
     this.clase = clase;
   }
 
-  // async mostrarDatosQr() {
-  //   this.dino = JSON.parse(this.jsonEmpty);
-  //   this.tieneDatos = false;
-  //   // const data = await this.storage.getQR();
-  //   if (data === null) {
-  //     return;
-  //   }
-  //   if (data === '') {
-  //     return;
-  //   }
-  //   const dino = JSON.parse(data);
-  //   if (dino.name === undefined) {
-  //     return;
-  //   }
-  //   this.hasData = true;
-  //   this.dino = dino;
-  // }
+  
 }

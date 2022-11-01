@@ -4,6 +4,7 @@ import { Platform } from '@ionic/angular';
 import { log } from './model/Message';
 import { AuthService } from './services/authentication.service';
 import { DatabaseService } from './services/database.service';
+import { StorageService } from './services/storage.service';
 
 @Component({
   selector: 'app-root',
@@ -13,12 +14,14 @@ import { DatabaseService } from './services/database.service';
 export class AppComponent {
   
   constructor(
+    private storage:StorageService, 
     private platform: Platform,
     private db: DatabaseService,
     private auth: AuthService,
     private router: Router
   ) {
     this.StartApp();
+    this.initializeApp();
   }
 
   async StartApp() {
@@ -36,6 +39,12 @@ export class AppComponent {
       });
     });
 
+  }
+
+  async initializeApp() {
+    this.platform.ready().then(async () => {
+      await this.storage.init();
+    });
   }
 }
 

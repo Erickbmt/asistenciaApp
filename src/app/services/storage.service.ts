@@ -24,7 +24,9 @@ export class StorageService {
     dbOptions: capOpenStorageOptions;
     isRunning: boolean;
     
-    constructor(private db: SQLiteService) { }
+    constructor(private ionicStorage: Storage) { 
+        this.init();
+    }
 
     StartStorageService(callee: string): Promise<boolean> {
 
@@ -161,19 +163,29 @@ export class StorageService {
     async deleteTable(): Promise<void> {
         return await this.store.deleteTable({ table: this.table });
     }
+
+    //QR
     async saveQR(data: string) {
         this.set('QR', data);
     }
     async getQR() {
         return this.get('QR');
     }
-    async clearQr() {
-        await this.storage.remove('QR_DATA');
-    }
+    // async clearQr() {
+    //     await this.storage.remove('QR_DATA');
+    // }
     set(key: string, value: any) {
         this.storage.set(key, value);
     }
     async get(key: string) {
         return await this.storage.get(key);
     }
+
+    async init() {
+        this.storage = await this.ionicStorage.create();
+      }
+
+    async remove(key: string) {
+        return await this.storage.remove(key);
+      }
 }

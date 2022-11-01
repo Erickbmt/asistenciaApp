@@ -65,20 +65,21 @@ ionViewWillLeave(): void {
 async showComponent(name: string) {
   this.showinicio = name === 'inicio';
   this.showqr = name === 'qr';
-  this.showmiclase = name === 'miclase';
+  this.showmiclase = name === 'mi-clase';
   this.showforo = name === 'foro';
 
   if (name === 'qr') {
     const content = await this.qr.scan();
     await this.storage.saveQR(content);
     this.showqr = false;
-    this.selectedComponent = 'miclase';
+    this.selectedComponent = 'mi-clase';
     this.showmiclase = true;
     this.miclase.mostrarDatosQROrdenados();
   } else {
     this.qr.stop();
   }
 }
+
 
 segmentChanged($event) {
   this.showComponent($event.detail.value);

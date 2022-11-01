@@ -12,6 +12,7 @@ import { AuthGuardService } from './services/auth-guard.service';
 import { DatabaseService } from './services/database.service';
 import { AuthService } from './services/authentication.service';
 import { StorageService } from './services/storage.service';
+import { Storage } from '@ionic/storage';
 
 
 @NgModule({
@@ -23,6 +24,7 @@ import { StorageService } from './services/storage.service';
   DatabaseService,
   AuthService,
   StorageService,
+  Storage,
    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],
 })
