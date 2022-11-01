@@ -1,4 +1,4 @@
-import { Component, NgModule, OnInit } from '@angular/core';
+import { Component, NgModule } from '@angular/core';
 import { IonicModule, ToastController } from '@ionic/angular';
 import { ApiclientService } from 'src/app/services/apiclient.service';
 import { CommonModule } from '@angular/common';
@@ -74,6 +74,7 @@ export class ForoComponent {
   // 4. Cargar la lista de "Publicaciones recientes".
 
   ionViewWillEnter() {
+    console.log('Usuario entro a la api');
     this.selectedUserId = null;
     this.setPublicacion(null, null, '', '', '');
     this.getUsuarios();

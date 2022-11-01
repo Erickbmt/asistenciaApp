@@ -8,7 +8,9 @@ import { Router} from '@angular/router';
   styleUrls: ['./mi-clase.component.scss'],
 })
 export class MiClaseComponent implements OnInit {
+
   clase: any;
+
   hasData = false;
   jsonEmpty = 
   `{
@@ -27,10 +29,7 @@ export class MiClaseComponent implements OnInit {
   constructor(private storage: StorageService, private router: Router) { }
 
   async ngOnInit() {
-    // this.storage.getItem("QR_DATA").then(({ value }) => {
-    //   this.clase = JSON.parse(value);
      this.mostrarDatosQROrdenados();
-  // })};
   }
   
   
@@ -39,19 +38,28 @@ export class MiClaseComponent implements OnInit {
     this.clase = JSON.parse(this.jsonEmpty);
     this.hasData = false;
     const data = await this.storage.getQR();
+    console.log('iniciando mostrarDatos...');
     if (data === null) {
+      console.log('Datos nulos');
       return;
     }
     if (data === '') {
+      console.log('No hay datos');
       return;
     }
     const clase = JSON.parse(data);
-    if (clase.name === undefined) {
+    if (clase.sede === undefined) {
+      console.log('La clase y su nombre no estan definidos');
       return;
     }
     this.hasData = true;
     this.clase = clase;
+    console.log('Pasamos todo con exito!');
   }
 
-  
+  public limpiarDatos(): void{
+    this.clase = this.storage.clearQr();
+    console.log('Se ha borrado exitosamente datos Mi-Clase');
+  }
+
 }

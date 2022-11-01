@@ -171,9 +171,9 @@ export class StorageService {
     async getQR() {
         return this.get('QR');
     }
-    // async clearQr() {
-    //     await this.storage.remove('QR_DATA');
-    // }
+    async clearQr() {
+        await this.storage.remove('QR');
+    }
     set(key: string, value: any) {
         this.storage.set(key, value);
     }

@@ -75,8 +75,6 @@ async showComponent(name: string) {
     this.selectedComponent = 'mi-clase';
     this.showmiclase = true;
     this.miclase.mostrarDatosQROrdenados();
-  } else {
-    this.qr.stop();
   }
 }
 
@@ -89,15 +87,6 @@ async stopScanner() {
   this.qr.stop();
   this.showComponent('inicio');
   this.selectedComponent = 'inicio';
-}
-// Metodo de navegar pero para el componente de inicio
-public inicioComponente(): void {
-  const navigationExtras: NavigationExtras = {
-    state: {
-      usuario: this.usuario
-    }
-  };
-  this.router.navigate(['/home/inicio'], navigationExtras);
 }
 
 // Animaciones
