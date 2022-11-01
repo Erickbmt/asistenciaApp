@@ -76,6 +76,14 @@ async showComponent(name: string) {
     this.showmiclase = true;
     this.miclase.mostrarDatosQROrdenados();
   }
+  if (name === 'foro'){
+    this.selectedComponent = 'foro';
+    this.showforo = true;
+    this.foro.ionViewWillEnter();
+  }
+  else {
+    this.qr.stop();
+  }
 }
 
 

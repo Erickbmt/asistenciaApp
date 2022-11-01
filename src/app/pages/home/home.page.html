@@ -1,12 +1,12 @@
 <ion-app>
   <ion-header>
-    <ion-toolbar color="primary" >
+    <ion-toolbar color="secondary" >
       <ion-title #titulo>
         <ion-img src="../assets/images/logo_duoc.png" style="max-width: 50%; max-height: 70%;" ></ion-img>
-        <h1>Sistema de Asistencia DUOC</h1>
+        <h2>Sistema de Asistencia DUOC</h2>
       </ion-title>
-      <ion-item [hidden]="!showqr">
-        <ion-button (click)="stopScanner()" expand="block" shape="round" class="center-margin-auto">
+      <ion-item color="secondary" [hidden]="!showqr">
+        <ion-button (click)="stopScanner()" expand="block" shape="round" class="center-margin-auto" color="dark">
           Stop scanner
         </ion-button>
       </ion-item>
@@ -48,8 +48,8 @@
   <app-qr #qr></app-qr>
   
   
-  <ion-footer color="tertiary">
-    <ion-toolbar>
+  <ion-footer>
+    <ion-toolbar color="secondary">
       <hr>
       <ion-label>
         <ion-button expand="block" shape="round" (click)="salir()" color="danger" style="padding-left: 40px; padding-right: 40px;" #qrAnimado>Cerrar Sesión</ion-button>

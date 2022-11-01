@@ -1,12 +1,12 @@
 <ion-header [translucent]="true">
 
-  <ion-toolbar mode="ios">
+  <ion-toolbar mode="ios" color="secondary">
     <ion-title class="tituloPrincipal">
       ¡FORO!
     </ion-title>
   </ion-toolbar>
 
-  <ion-toolbar>
+  <ion-toolbar color="secondary">
     <ion-card>
       <ion-item lines="none">
         <span>
@@ -26,7 +26,7 @@
 
 </ion-header>
 
-<ion-content [fullscreen]="true">
+<ion-content [fullscreen]="true" color="dark">
   <a id="topOfPage" href="#topOfPage"></a>
   <ion-card>
 
@@ -36,29 +36,29 @@
     </ion-card-header>
 
     <ion-item class="ion-padding-horizontal">
-      <ion-label position="floating" color="Secondary">Título</ion-label>
+      <ion-label position="floating" color="success">Título</ion-label>
       <ion-input [(ngModel)]="publicacion.title"></ion-input>
     </ion-item>
 
     <ion-item class="ion-padding-horizontal">
-      <ion-label position="floating" color="Secondary">Cuerpo</ion-label>
+      <ion-label position="floating" color="success">Cuerpo</ion-label>
       <ion-textarea [(ngModel)]="publicacion.body"></ion-textarea>
     </ion-item>
 
     <ion-grid>
       <ion-row>
-        <ion-col><ion-button shape="round" expand="block" (click)="limpiarPublicacion()">Limpiar</ion-button></ion-col>
-        <ion-col><ion-button shape="round" expand="block" (click)="guardarPublicacion()">Guardar</ion-button></ion-col>
+        <ion-col><ion-button shape="round" color="danger" expand="block" (click)="limpiarPublicacion()">Limpiar</ion-button></ion-col>
+        <ion-col><ion-button shape="round" color="success" expand="block" (click)="guardarPublicacion()">Guardar</ion-button></ion-col>
       </ion-row>
     </ion-grid>
 
   </ion-card>
 
-  <ion-card class="sin-bordes">
+  <ion-card class="sin-bordes" color="dark">
     <ion-card-title class="con-padding-top">Publicaciones recientes</ion-card-title>
   </ion-card>
 
-  <ion-card *ngFor="let p of publicaciones; let i=index; trackBy: getIdentificadorItemPublicacion">
+  <ion-card *ngFor="let p of publicaciones; let i=index; trackBy: getIdentificadorItemPublicacion" color="light">
 
     <ion-card-header>
       <h6>(Publicación #{{p.id}}) {{p.name}}</h6>
@@ -69,11 +69,11 @@
       {{p.body}}
     </ion-card-content>
 
-    <ion-button (click)="editarPublicacion(p)">
+    <ion-button (click)="editarPublicacion(p)" color="success">
       <ion-icon slot="icon-only" name="pencil-outline"></ion-icon>
     </ion-button>
 
-    <ion-button (click)="eliminarPublicacion(p)">
+    <ion-button (click)="eliminarPublicacion(p)" color="danger">
       <ion-icon slot="icon-only" name="trash-outline"></ion-icon>
     </ion-button>
 
