@@ -4,6 +4,7 @@ import { Usuario } from 'src/app/model/Usuario';
 import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
 import { LowerCasePipe, UpperCasePipe } from '@angular/common';
+import { StorageService } from 'src/app/services/storage.service';
 
 
 @Component({
@@ -15,16 +16,19 @@ export class PreguntaPage implements OnInit {
 
 // Clase usuario
   public usuario: Usuario;
+  public respuesta = '';
 
 // Constructor que traera la información de la anterior pagina
   constructor(
     private activeroute: ActivatedRoute
   , private router: Router
-  , private toastController: ToastController) {
+  , private toastController: ToastController
+  , private storage: StorageService) {
 
   }
 
   ngOnInit() {
+
   }
 // Validar la respuesta
 
@@ -39,19 +43,11 @@ export class PreguntaPage implements OnInit {
 
     this.router.navigate(['/correcto'],);
   }
-
-// -------------------- Validar errores ---------------------
-  // Validar respuesta cuando no haya nada puesto
-  // public validarRespuesta(usuario: Usuario): boolean {
-  //   const user = usuario.buscarRespuestaValida(this.usuario.respuesta);
-
-  // Navegacion hacia el incorrecto
-  // Si tratas de quitar el navigation extras
-  // No podras ingresar a la pagina y sera redireccionado directamente al login
-  // segun el metodo constructor de incorrecto.page.ts
-  // Hace que si recibe datos de cualquier tipo de esta pagina hacia incorrecto te dejara estar ahi
-  // Si le quitas navigation extras no devolvera datos y seras redirigido
   public incorrecto(): void {
     this.router.navigate(['/incorrecto']);
   }
+
+public iniciarSesion(){
+  this.router.navigate(['/login']);
+}
 }

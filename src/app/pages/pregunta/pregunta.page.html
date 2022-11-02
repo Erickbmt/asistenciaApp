@@ -19,16 +19,16 @@
       <hr>
       <ion-card-content>
         <ion-item class="ion-padding-top">
-          <ion-label *ngIf="usuario" position="floating">{{usuario.pregunta}}</ion-label>
-          <ion-input type="text" placeholder="Responda la pregunta secreta" ></ion-input>
+          <ion-label *ngIf="usuario" style="color: black;" position="floating">pregunta:{{usuario.preguntaSecreta}}</ion-label>
+          <ion-input type="text" placeholder="Responda la pregunta secreta" [(ngModel)]="respuesta"></ion-input>
         </ion-item>
         <ion-row>
           <ion-col size="12">
-            <ion-button (click)="ingresarRespuesta()" shape="block">Recuperar contraseña</ion-button>
+            <ion-button (click)="ingresarRespuesta()" shape="block" color="success">Recuperar contraseña</ion-button>
           </ion-col>
         </ion-row>
         
-        <ion-button (click)="iniciarSesion()" shape="block" fill="clear">
+        <ion-button (click)="iniciarSesion()" shape="block" color="danger">
         Iniciar sesion
         </ion-button>
       </ion-card-content>

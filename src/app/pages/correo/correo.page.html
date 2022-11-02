@@ -17,17 +17,17 @@
         <ion-item class="ion-padding-top">
           <ion-label position="floating">Paso 1: Ingrese su correo electrónico</ion-label>
           <br>
-          <ion-input type="text" placeholder="Ingresa tu correo electrónico"></ion-input>
+          <ion-input type="text" placeholder="Ingresa tu correo electrónico" [(ngModel)]="correo"></ion-input>
         </ion-item>
         <br>
         <ion-row>
           <ion-col size="12">
-            <ion-button (click)="ingresar()" shape="block">Recuperar contraseña</ion-button>
+            <ion-button (click)="ingresar()" shape="block" color="success">Recuperar contraseña</ion-button>
           </ion-col>
         </ion-row>
         
         <br>
-        <ion-button (click)="iniciarSesion()" shape="block" fill="clear">
+        <ion-button (click)="iniciarSesion()" shape="block" color="danger">
         Volver al Inicio
         </ion-button>
       </ion-card-content>
