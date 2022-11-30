@@ -35,6 +35,16 @@ describe('AppComponent', () => {
           usuario.password = '';
           expect(usuario.validatePassword(usuario.password)).toContain('Para entrar al sistema debe ingresar la contraseña.');
         });
+
+        it ('Probar que la contraseña no sea mayor a 4 digitos', () =>{
+          usuario.password = '12345';
+          expect(usuario.validatePassword(usuario.password)).toContain('La contraseña debe ser menor a 4 digitos');
+        });
+
+        it ('Probar que la contraseña sea numerica', () =>{
+          usuario.password = 'abcd';
+          expect(usuario.validatePassword(usuario.password)).toContain('La contraseña debe ser numérica.');
+        });
   
       });
 

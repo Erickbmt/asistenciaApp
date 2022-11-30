@@ -50,7 +50,7 @@ export class Usuario {
         }
       }
 
-      if (password.length !== 4) return 'La contraseña debe ser mayor a 4 digitos';
+      if (password.length !== 4) return 'La contraseña debe ser menor a 4 digitos';
 
       return '';
     }
