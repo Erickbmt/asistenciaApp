@@ -55,6 +55,11 @@ describe('AppComponent', () => {
           usuario.correo = '';
           expect(usuario.validateEmail(usuario.correo)).toContain('Para ingresar al sistema debe ingresar el correo del usuario.');
         });
+
+        it ('Probar que el correo debe ser menor a 17 letras', () =>{
+          usuario.correo = 'abcdefghyjklmnñopq';
+          expect(usuario.validateEmail(usuario.correo)).toContain('El correo debe ser menor a 17 letras');
+        });
   
       });
   
