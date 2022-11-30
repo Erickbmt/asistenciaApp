@@ -39,8 +39,8 @@ export class Usuario {
     validateEmail(correo: string): string {
       if (correo.trim() === '') return 'Para ingresar al sistema debe ingresar el correo del usuario.';
       if(correo.length !== 17) return 'El correo debe ser menor a 17 letras';
-      
-  }
+      return '';
+    }
   
     validatePassword(password: string): string {
       if (password.trim() === '') return 'Para entrar al sistema debe ingresar la contraseña.';
