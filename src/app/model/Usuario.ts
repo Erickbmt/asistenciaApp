@@ -38,13 +38,8 @@ export class Usuario {
 
     validateEmail(correo: string): string {
       if (correo.trim() === '') return 'Para ingresar al sistema debe ingresar el correo del usuario.';
-
-      for(let i = 0; i < this.correo.length; i++){
-        if('abcdefghyjklmnñopq'.indexOf(this.correo.charAt(i)) === -1){
-        return 'El correo debe ser alfabetico.';
-      }
-    }
-    if(correo.length !== 17) return 'El correo debe ser menor a 17 letras';
+      if(correo.length !== 17) return 'El correo debe ser menor a 17 letras';
+      
   }
   
     validatePassword(password: string): string {
