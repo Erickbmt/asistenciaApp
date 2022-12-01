@@ -14,16 +14,19 @@ import { StorageService } from 'src/app/services/storage.service';
 })
 export class CorreoPage implements OnInit {
 
-  private usuario: Usuario;
+  public usuario: Usuario;
 
-  private correo = '';
-  
+  public correo = '';
   constructor(private router: Router, private toastController: ToastController, private auth: AuthService,
     private readonly databaseService: DatabaseService, private readonly storageService: StorageService,
     private alertController: AlertController) {
   }
   // Pescar algo de la bd  y compararlo con lo que puso el usuario
   ngOnInit() {
+  }
+
+  public ionViewDidLeave(): void {
+    this.correo = '';
   }
 
   // Para navegar hacia preguntas

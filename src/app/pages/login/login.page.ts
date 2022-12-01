@@ -19,19 +19,25 @@ export class LoginPage{
   correo: string = '';
   password: string = '';
   constructor(private auth: AuthService, private db: DatabaseService, private router : Router, private storage: StorageService) {
-    this.correo = 'atorres@duocuc.cl';
-    this.password = '1234';
+    //this.correo = 'atorres@duocuc.cl';
+    //this.password = '1234';
     
 
+  }
+  public ionViewDidLeave(): void {
+    this.correo = '';
+    this.password = '';
   }
   async ingresar() {
     this.auth.login(this.correo, this.password);
   }
  
-
-
   public ingresoCorreo(): void {
     this.router.navigate(['/correo']);
+  }
+
+  public registrarse(): void {
+    this.router.navigate(['/registrarse']);
   }
 }
 

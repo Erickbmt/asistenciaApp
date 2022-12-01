@@ -21,5 +21,4 @@ import { HomePage } from './home.page';
   it('should create', () => {
     expect(component).toBeTruthy();
   });
-});
-*/
+});*/
