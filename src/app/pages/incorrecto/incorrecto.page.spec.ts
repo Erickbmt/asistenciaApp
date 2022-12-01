@@ -3,7 +3,7 @@ import { IonicModule } from '@ionic/angular';
 
 import { IncorrectoPage } from './incorrecto.page';
 
-describe('IncorrectoPage', () => {
+/*describe('IncorrectoPage', () => {
   let component: IncorrectoPage;
   let fixture: ComponentFixture<IncorrectoPage>;
 
@@ -22,3 +22,4 @@ describe('IncorrectoPage', () => {
     expect(component).toBeTruthy();
   });
 });
+*/
