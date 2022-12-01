@@ -14,9 +14,10 @@ import { StorageService } from 'src/app/services/storage.service';
 })
 export class CorreoPage implements OnInit {
 
-  public usuario: Usuario;
+  private usuario: Usuario;
 
-  public correo = '';
+  private correo = '';
+  
   constructor(private router: Router, private toastController: ToastController, private auth: AuthService,
     private readonly databaseService: DatabaseService, private readonly storageService: StorageService,
     private alertController: AlertController) {
