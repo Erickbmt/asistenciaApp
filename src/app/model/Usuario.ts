@@ -2,6 +2,7 @@ import { DatabaseService } from "../services/database.service";
 import { SQLiteService } from "../services/sqlite.service";
 import { showAlertDUOC } from "./Message";
 
+
 export class Usuario {
 
     public correo = '';
@@ -72,5 +73,29 @@ export class Usuario {
         return Promise.resolve(usu);
       });
     }
+
+    validateName(nombre: string): string {
+      if (nombre.trim() === '') return 'Debe ingresar su nombre.';
+      return '';
+    }
+
+    validateSecretQuestion(question: string): string {
+      if (question.trim() === '') return 'Debe ingresar su pregunta secreta.';
+      return '';
+    }
+
+    validateSecretAnswer(answer: string): string {
+      if (answer.trim() === '') return 'Debe ingresar su respuesta secreta.';
+      return '';
+    }
+
+    validateUserFields(correo: string, password: string, name: string
+      , secretQuestion: string, secretAnswer: string): string {
+    return this.validateEmail(correo) 
+      || this.validatePassword(password)
+      || this.validateName(name)
+      || this.validateSecretQuestion(secretQuestion)
+      || this.validateSecretAnswer(secretAnswer)
+  }
   }
   
