@@ -20,7 +20,7 @@
       <hr>
       <ion-card-content>
         <ion-item class="ion-padding-top">
-          <ion-label *ngIf="usuario" style="color: black;">{{usuario.preguntaSecreta}}</ion-label>
+          <ion-label *ngIf="usuario" style="color: black;" position="floating">pregunta:{{usuario.preguntaSecreta}}</ion-label>
           <ion-input type="text" placeholder="Responda la pregunta secreta" [(ngModel)]="respuesta"></ion-input>
         </ion-item>
         <ion-row>

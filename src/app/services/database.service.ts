@@ -63,6 +63,11 @@ export class DatabaseService {
         return Promise.resolve(usu);
     }
 
+    async getUserByMail(mail: string) {
+        const { values } = await (this.sqlite.query("SELECT * FROM Usuario WHERE correo = ?", [mail]));
+        return values;
+    }
+
     async logUsers() {
         const rs: DBSQLiteValues = await this.readUsers();
         console.log(`Cantidad de usuarios: ${rs.values.length}`);
