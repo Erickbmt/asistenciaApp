@@ -15,9 +15,10 @@ import { StorageService } from 'src/app/services/storage.service';
 export class PreguntaPage implements OnInit {
 
 // Clase usuario
-  public usuario: Usuario;
-  public respuesta = '';
-
+  private usuario: Usuario;
+  private pregunta: string;
+  private respuesta = '';
+  private respuestaEsperada: string;
 // Constructor que traera la información de la anterior pagina
   constructor(
     private activeroute: ActivatedRoute
@@ -28,7 +29,11 @@ export class PreguntaPage implements OnInit {
   }
 
   ngOnInit() {
-
+    this.storage.getItem("forgot").then(data => {
+      const userData = JSON.parse(data.value);
+      this.pregunta = userData.preguntaSecreta;
+      this.respuestaEsperada = userData.respuestaSecreta;
+    })
   }
 // Validar la respuesta
 
@@ -39,14 +44,15 @@ export class PreguntaPage implements OnInit {
 
  
   //Navegar despues de responde la pregunta hacia la pagina Correcto o Incorrecto
- //public recuperarContrasena(): void {
-
+  //public recuperarContrasena(): void {
+  //console.log(this.respuesta);
+  //console.log(this.respuestaEsperada);
+  if((this.respuesta).trim() === this.respuestaEsperada) {
     this.router.navigate(['/correcto'],);
-  }
-  public incorrecto(): void {
+  }else {
     this.router.navigate(['/incorrecto']);
   }
-
+  }
 public iniciarSesion(){
   this.router.navigate(['/login']);
 }
