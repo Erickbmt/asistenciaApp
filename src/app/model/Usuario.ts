@@ -39,11 +39,21 @@ export class Usuario {
 
     validateEmail(correo: string): string {
       if (correo.trim() === '') return 'Para ingresar al sistema debe ingresar el correo del usuario.';
+      if(correo.length !== 17) return 'El correo debe ser menor a 17 letras';
       return '';
     }
   
     validatePassword(password: string): string {
       if (password.trim() === '') return 'Para entrar al sistema debe ingresar la contraseña.';
+
+      for(let i = 0; i < this.password.length; i++) {
+        if ('0123456789'.indexOf(this.password.charAt(i)) === -1) {
+          return 'La contraseña debe ser numérica.';
+        }
+      }
+
+      if (password.length !== 4) return 'La contraseña debe ser menor a 4 digitos';
+
       return '';
     }
 
